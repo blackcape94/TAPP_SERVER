@@ -29,7 +29,7 @@ else:
     DOMAIN_NAME = ""
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = 'staticfiles'
+    STATIC_ROOT = "%s/static/"%BASE_DIR
     STATIC_URL = '/static/'
     STATICFILES_DIRS = (
         "%s/frontend/assets/"%BASE_DIR,
