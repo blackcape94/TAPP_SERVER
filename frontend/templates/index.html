@@ -1,0 +1,11 @@
+<h1>INDEX</h1>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li {% if message.tags %} class="{{message.tags}}"{% endif %}>
+        {{ message }}
+      </li>
+    {% endfor %}
+{% endif %}
+<a href="{% url 'backend.views.login_page' %}">Sign In</a> | 
+<a href="{% url 'backend.views.signup_page' %}">Register</a>

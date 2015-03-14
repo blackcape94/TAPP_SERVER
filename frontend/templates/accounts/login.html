@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="shortcut icon" href="{% static 'img/logo.ico' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="{% static "css/login.css"%}">
+</head>
+<body>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{message.tags}}"{% endif %}>
+          {{ message }}
+        </li>
+      {% endfor %}
+  {% endif %}
+  login
+  <form id="login-form" action="{% url 'backend.views.process_login' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username" required/>
+    <input type="password" name="password" placeholder="Password" required/>
+    <input type="submit" value="Log In" href="#" id="submit">
+    <p>New User? <a href="{% url 'backend.views.signup_page' %}">Sign Up</a></p>
+    <br>
+    <a href="{% url 'backend.views.index' %}">Back Home</a>
+  </form>
+</body>
+</html>

@@ -1,0 +1,6 @@
+*.pyc
+development.sqlite3
+media
+static
+logs
+.DS_Store
