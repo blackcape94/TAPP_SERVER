@@ -1,4 +1,4 @@
-<h1>INDEX</h1>
+<h1>INDEX ({{DEPLOY_MODE}})</h1>
 {% if messages %}
   <ul class="messages">
     {% for message in messages %}
@@ -7,5 +7,5 @@
       </li>
     {% endfor %}
 {% endif %}
-<a href="{% url 'backend.views.login_page' %}">Sign In</a> | 
+<a href="{% url 'backend.views.login_page' %}">Sign In</a> |
 <a href="{% url 'backend.views.signup_page' %}">Register</a>

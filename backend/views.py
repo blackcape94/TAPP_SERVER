@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
+from django.conf import settings
 
 from forms import CreateUserForm, CreateTapperForm
 
@@ -20,7 +21,9 @@ from models import Tapper
 def index(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('home'))
-    return render(request, 'index.html')
+    return render(request, 'index.html', {
+        'DEPLOY_MODE': settings.DEPLOY_MODE
+    })
 
 @login_required
 def profile(request):

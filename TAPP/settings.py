@@ -1,22 +1,47 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+import dj_database_url
 
-DEPLOY_MODE = "development"
-DOMAIN_NAME = "http://127.0.0.1:8000"
-MEDIA_ROOT = "%s/media/"%BASE_DIR
-MEDIA_URL = "%s/media/"%DOMAIN_NAME
-STATIC_ROOT = "%s/static/"%BASE_DIR
-STATIC_URL = "%s/static/"%DOMAIN_NAME
+if not dj_database_url.config():
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    DEPLOY_MODE = "development"
+    DEBUG = True
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'development.sqlite3'),
+        }
+    }
+    DOMAIN_NAME = "http://127.0.0.1:8000"
+    MEDIA_ROOT = "%s/media/"%BASE_DIR
+    MEDIA_URL = "%s/media/"%DOMAIN_NAME
+    STATIC_ROOT = "%s/static/"%BASE_DIR
+    STATIC_URL = "%s/static/"%DOMAIN_NAME
+    STATICFILES_DIRS = (
+        "%s/frontend/assets/"%BASE_DIR,
+    )
+    WSGI_APPLICATION = 'TAPP.wsgi.application'
+else:
+    DEBUG = False
+    DATABASES = {}
+    DATABASES['default'] =  dj_database_url.config()
+    DEPLOY_MODE = "production"
+    DOMAIN_NAME = ""
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = 'staticfiles'
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'e&uv+ap&vys(&6fniejv&#)a(zq$kpxet=p!6++a9ih&!=bt4@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -47,18 +72,10 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'TAPP.urls'
 
-WSGI_APPLICATION = 'TAPP.wsgi.application'
-
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'development.sqlite3'),
-    }
-}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -78,10 +95,6 @@ LOGIN_REDIRECT_URL = '/profile'
 LOGIN_URL = '/login'
 
 SITE_ID = 1
-
-STATICFILES_DIRS = (
-    "%s/frontend/assets/"%BASE_DIR,
-)
 
 TEMPLATE_DIRS = (
     '%s/frontend/templates'%BASE_DIR,
