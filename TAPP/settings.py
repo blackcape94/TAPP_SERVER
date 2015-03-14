@@ -1,9 +1,9 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import dj_database_url
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 if not dj_database_url.config():
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     DEPLOY_MODE = "development"
     DEBUG = True
     DATABASES = {
@@ -26,9 +26,8 @@ else:
     DATABASES = {}
     DATABASES['default'] =  dj_database_url.config()
     DEPLOY_MODE = "production"
-    DOMAIN_NAME = ""
+    DOMAIN_NAME = "https://radiant-forest-9136.herokuapp.com"
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = "%s/static/"%BASE_DIR
     STATIC_URL = '/static/'
     STATICFILES_DIRS = (
