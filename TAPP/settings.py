@@ -32,7 +32,7 @@ else:
     STATIC_ROOT = 'staticfiles'
     STATIC_URL = '/static/'
     STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
+        "%s/frontend/assets/"%BASE_DIR,
     )
 
 # SECURITY WARNING: keep the secret key used in production secret!
