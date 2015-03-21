@@ -99,6 +99,8 @@ TEMPLATE_DIRS = (
     '%s/frontend/templates'%BASE_DIR,
 )
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
 ########## ALLAUTH ##############
 #
 # TEMPLATE_CONTEXT_PROCESSORS = (

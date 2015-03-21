@@ -17,6 +17,15 @@ urlpatterns += patterns('backend.views',
     url(r'^logout$', 'process_logout')
 )
 
+urlpatterns += patterns('backend.api',
+    url(r'^api/v1/get_user_info$', 'get_user_info'),
+    url(r'^api/v1/login$', 'user_login'),
+    url(r'^api/v1/logout$', 'user_logout'),
+    url(r'^api/v1/force_logout$', 'force_logout'),
+    url(r'^api/v1/is_logged_in$', 'is_logged_in'),
+    url(r'^api/v1/register$', 'user_register'),
+)
+
 
 
 if settings.DEPLOY_MODE == "development":
